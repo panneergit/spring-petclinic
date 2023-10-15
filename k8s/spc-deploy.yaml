@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-deploy
+spec:
+  minReadySeconds: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic-pod
+  template:
+    metadata:
+      name: petclinic-pod
+      labels:
+        app: petclinic-app
+    spec:
+      containers:
+        - name: petclinic-container
+          image: panneercts/springpetclinic:v1.0
+          ports:
+            - name: petwebport
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi              
+          livenessProbe:
+            httpGet:
+              path: /
+              port: petwebport
+            failureThreshold: 3
+            periodSeconds: 3
+            successThreshold: 1
+            initialDelaySeconds: 90
+          readinessProbe:
+            httpGet:
+              path: /
+              port: petwebport
+            failureThreshold: 3
+            periodSeconds: 3
+            successThreshold: 1
+            initialDelaySeconds: 90
