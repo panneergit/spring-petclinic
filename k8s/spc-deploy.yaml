@@ -15,9 +15,11 @@ spec:
       labels:
         app: petclinic-app
     spec:
+      imagePullSecrets:
+        name: regcred
       containers:
         - name: petclinic-container
-          image: panneercts/springpetclinic:v1.0
+          image: sourcetrace.jfrog.io/docker-local/petclinic:latest
           ports:
             - name: petwebport
               containerPort: 8080
