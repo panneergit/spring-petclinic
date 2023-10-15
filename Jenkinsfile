@@ -11,12 +11,12 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker image build -t panneercts/springpetclinic:latest .'
+                sh 'docker image build -t sourcetrace.jfrog.io/workshop-docker-local/petclinic:latest .'
             }
         }
         stage('Push to Artifactory & Scan') {
             steps {
-                sh 'docker image push panneercts/springpetclinic:latest'
+                sh 'docker image push sourcetrace.jfrog.io/workshop-docker-local/petclinic:latest'
             }
         }
         stage('Deploy to K8S Cluster') {
