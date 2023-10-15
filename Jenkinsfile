@@ -19,10 +19,10 @@ pipeline {
                 sh 'docker image push sourcetrace.jfrog.io/workshop-docker/petclinic:latest'
             }
         }
-        stage('Deploy to K8S Cluster') {
-            steps {
-                sh 'kubectl apply -f k8s/'
-            }
-        }
+        // stage('Deploy to K8S Cluster') {
+        //     steps {
+        //         sh 'kubectl apply -f k8s/'
+        //     }
+        // }
     }
 }
